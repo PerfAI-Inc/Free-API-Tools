@@ -25,6 +25,10 @@
 
 In today's fast-paced software development world, maintaining high-quality API governance is crucial yet challenging. GovernanceAI simplifies this by providing developers and organizations with powerful, automated tools to scan, analyze, and improve their APIs. This open-source project leverages advanced AI to identify issues in real-time, offering actionable insights to enhance API design, security, and performance.
 
+## What is GovernanceAI and why should I care
+
+
+
 ## GovernanceAI Free and Open API
 
 GovernanceAI's API is freely available for developers to integrate into their workflows. Whether you're using cURL, Postman, or Insomnia, you can easily incorporate GovernanceAI's capabilities into your projects.
