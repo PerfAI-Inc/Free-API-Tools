@@ -18,16 +18,15 @@ env:
   GKE_CLUSTER: us-cluster1                      # Add your cluster name here.
   GKE_ZONE: us-central1-c                       # Add your cluster zone here.
   
-
 jobs:
- Deploy-Developer:
-    runs-on: ubuntu-latest
+  Deploy-Developer:
+     runs-on: ubuntu-latest
 
-      permissions:
+     permissions:
         contents: 'read'
         id-token: 'write'
    
-      steps:
+     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
