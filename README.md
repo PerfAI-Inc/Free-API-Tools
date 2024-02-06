@@ -61,11 +61,11 @@ Please star the repo if you find it useful!
 
 ## Fair-use Policy
 
-You are free to use, modify, and distribute the code for “Free-API-Tools”  for personal or commercial purposes. Please refrain from using the code for malicious purposes or violating any laws. While attribution is encouraged, it's not mandatory. Contributions are welcome under the same license. The code comes without warranties, and we are not liable for any issues. Report violations via the repository or the email listed in the contact information. We reserve the right to modify this policy. By using the code, you agree to comply with this Fair Use Policy.
+You are free to use, modify, and distribute the code for “Governance-AI”  for personal or commercial purposes. Please refrain from using the code for malicious purposes or violating any laws. While attribution is encouraged, it's not mandatory. Contributions are welcome under the same license. The code comes without warranties, and we are not liable for any issues. Report violations via the repository or the email listed in the contact information. We reserve the right to modify this policy. By using the code, you agree to comply with this Fair Use Policy.
 
 ## License
 
-The code in this repository is licensed under the Apache License, Version 2.0. You are free to use, modify, and distribute the code for “Free-API-Tools” for personal or commercial purposes. The license allows for open and free use, with the condition that any contributions you make are also licensed under the same terms. Please refer to the “LICENSE” file for the full text of the Apache License, Version 2.0.
+The code in this repository is licensed under the Apache License, Version 2.0. You are free to use, modify, and distribute the code for “Governance-AI” for personal or commercial purposes. The license allows for open and free use, with the condition that any contributions you make are also licensed under the same terms. Please refer to the “LICENSE” file for the full text of the Apache License, Version 2.0.
 
 ## Roadmap
 
