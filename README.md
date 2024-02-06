@@ -1,3 +1,5 @@
+![Forks](https://img.shields.io/github/forks/PerfAI-Inc/Free-API-Tools)
+
 # GovernanceAI Free API Tools
 
 ## Introduction
