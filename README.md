@@ -1,5 +1,3 @@
-![Forks](https://img.shields.io/github/forks/PerfAI-Inc/Free-API-Tools)
-
 <table>
   <thead align="center">
     <tr border: none;>
