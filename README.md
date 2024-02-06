@@ -31,7 +31,7 @@ Lack of governance leads to poor and failed APIs resulting in hard to maintain, 
 
 ## GovernanceAI Free and Open API
 
-In the absence of proper governance, APIs may suffer from poor design, failed implementations, and become challenging to maintain and extend. Governance AI offers an automated solution to mitigate these risks, minimizing the potential for API-related pitfalls and enhancing overall efficiency in API governance processes.
+GovernanceAI's API is freely available for developers to integrate into their workflows. Whether you're using cURL, Postman, or Insomnia, you can easily incorporate GovernanceAI's capabilities into your projects.
 
 ### How to Use
 
