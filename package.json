@@ -1,0 +1,16 @@
+{
+  "name": "free-api-tools",
+  "version": "1.0.0",
+  "description": "Free and public test tools for APIs from PerfAI Inc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/swagger": "^7.2.0",
+    "axios": "^1.6.7",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
