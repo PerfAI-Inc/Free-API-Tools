@@ -17,9 +17,11 @@
   </tbody>
 </table>
 
-# GovernanceAI Free API Tools
+# GovernanceAI Free API Tools (Beta)
 
 ## Introduction
+
+**Note: This project is currently in Beta. We're actively improving it and welcome any feedback.**
 
 In today's fast-paced software development world, maintaining high-quality API governance is crucial yet challenging. GovernanceAI simplifies this by providing developers and organizations with powerful, automated tools to scan, analyze, and improve their APIs. This open-source project leverages advanced AI to identify issues in real-time, offering actionable insights to enhance API design, security, and performance.
 
