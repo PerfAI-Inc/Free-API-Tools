@@ -6,7 +6,7 @@
       <td><b>📘 Project</b></td>
       <td><b>⭐ Stars</b></td>
       <td><b>🤝 Forks</b></td>
-      <td><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></td>
+      <td>LinkedIn</td>
     </tr>
   </thead>
   <tbody>
@@ -14,7 +14,7 @@
       <td><a href="https://github.com/PerfAI-Inc/Free-API-Tools"><b>Free API Tools</b></a></td>
       <td><img alt="Stars" src="https://img.shields.io/github/stars/PerfAI-Inc/Free-API-Tools?style=flat-square&labelColor=343b41"/></td>
       <td><img alt="Forks" src="https://img.shields.io/github/forks/PerfAI-Inc/Free-API-Tools?style=flat-square&labelColor=343b41"/></td>
-      <td><a href="https://www.linkedin.com/in/dhanushkamadushan/" target="_blank" /></td>
+      <td><a href="https://www.linkedin.com/in/dhanushkamadushan/" target="_blank"<img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"> /></td>
     </tr>
   </tbody>
 </table>
