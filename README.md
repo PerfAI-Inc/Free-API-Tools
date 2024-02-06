@@ -34,7 +34,7 @@ GovernanceAI's API is freely available for developers to integrate into their wo
 **cURL Example:**
 
 ```bash
-curl -X POST http://api.governanceai.example.com/scan \
+curl -X POST https://api.governanceai.example.com/scan \
 -H "Content-Type: application/json" \
 -d '{
   "openApiSpecUrl": "https://yourapi.com/spec.yaml"
