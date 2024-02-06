@@ -22,30 +22,47 @@ export class GovernanceAiController {
             });
 
             // Extract the _id from the third element of the response array
-            // console.log(registrationResponse.data[2]._id);
             const appId = registrationResponse.data[2]._id;
-            console.log(appId);
+
+            let timeoutReached = false;
+
+            // Create a timeout promise
+            const timeoutPromise = new Promise(resolve => {
+                setTimeout(() => {
+                    timeoutReached = true;
+                    resolve('TIMEOUT');
+                }, 60000);
+            });
 
             // Step 2: Poll the endpoint until the analysis is COMPLETE
             let analysisStatus = '';
             let analysisResponse;
             do {
-                analysisResponse = await axios.get(`https://webapp.api.perfaibackend.com/api/v1/design-analysis-service/apps?id=${appId}`, {
-                    headers: {
-                        'Authorization': `Bearer ${this.token}`
-                    }
-                });
-                console.log();
-                analysisStatus = analysisResponse.data.latest_run.status;
-                if (analysisStatus !== 'COMPLETED') {
-                    // Wait for 1 seconds before polling again
-                    console.log(analysisStatus);
-                    await new Promise(resolve => setTimeout(resolve, 1000));
+                const result = await Promise.race([
+                    axios.get(`https://webapp.api.perfaibackend.com/api/v1/design-analysis-service/apps?id=${appId}`, {
+                        headers: {
+                            'Authorization': `Bearer ${this.token}`
+                        }
+                    }).then(response => {
+                        analysisResponse = response;
+                        analysisStatus = response.data.latest_run.status;
+                        console.log(analysisStatus);
+                        if (analysisStatus !== 'COMPLETED') {
+                            return new Promise(resolve => setTimeout(resolve, 1000)); // Continue polling
+                        }
+                        return 'COMPLETED';
+                    }),
+                    timeoutPromise
+                ]);
+
+                if (result === 'TIMEOUT' || timeoutReached) {
+                    console.log('Timeout reached, exiting...');
+                    res.status(408).json({ message: 'Processing timeout.' });
+                    return;
                 }
+
             } while (analysisStatus !== 'COMPLETED');
 
-            // Once COMPLETE, respond with the issues from the das field
-            console.log(analysisStatus);
             const formattedResponse = JSON.stringify(analysisResponse.data.das, null, 2);
             res.setHeader('Content-Type', 'application/json');
             res.status(200).send(formattedResponse);
