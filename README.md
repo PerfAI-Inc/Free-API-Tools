@@ -14,11 +14,6 @@
       <td><img alt="Stars" src="https://img.shields.io/github/stars/PerfAI-Inc/Free-API-Tools?style=flat-square&labelColor=343b41"/></td>
       <td><img alt="Forks" src="https://img.shields.io/github/forks/PerfAI-Inc/Free-API-Tools?style=flat-square&labelColor=343b41"/></td>
     </tr>
-    <tr>
-      <td><a href="https://github.com/madushadhanushka/differ"><b>Simple SQLite</b></a></td>
-      <td><img alt="Stars" src="https://img.shields.io/github/stars/madushadhanushka/simple-sqlite?style=flat-square&labelColor=343b41"/></td>
-      <td><img alt="Forks" src="https://img.shields.io/github/forks/madushadhanushka/simple-sqlite?style=flat-square&labelColor=343b41"/></td>
-    </tr>
   </tbody>
 </table>
 
