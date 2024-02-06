@@ -1,4 +1,4 @@
-<table>
+ <table>
   <thead align="center">
     <tr border: none;>
       <td><b>📘 Project</b></td>
@@ -17,11 +17,26 @@
   </tbody>
 </table>
 
-# GovernanceAI Free API Tools
+# GovernanceAI Free API Tools (Beta)
 
 ## Introduction
 
+**Note: This project is currently in Beta. We're actively improving it and welcome any feedback.**
+
 In today's fast-paced software development world, maintaining high-quality API governance is crucial yet challenging. GovernanceAI simplifies this by providing developers and organizations with powerful, automated tools to scan, analyze, and improve their APIs. This open-source project leverages advanced AI to identify issues in real-time, offering actionable insights to enhance API design, security, and performance.
+
+## What is GovernanceAI and why should you care?
+
+**Mitigate Risks & Ensure Excellence**: In the fast-paced startup environment, the quality of your APIs directly impacts your product's success and market competitiveness. GovernanceAI empowers companies to automate API governance, ensuring high-quality, secure, and efficient APIs that drive excellent web and mobile applications.
+
+**Proactive Problem-Solving**: With GovernanceAI, you're not just identifying issues; you're preventing the potential fallout of shipping bad APIs—including compromised security, poor performance, and ultimately, a tarnished brand reputation. Our advanced AI tools offer real-time insights and actionable feedback, allowing you to address problems before they affect your users.
+
+**Stay Ahead of Competitors**: In the competitive tech landscape, the margin for error is slim. GovernanceAI ensures that your APIs are a strength, not a liability, by maintaining high standards of quality and security. This is not just about avoiding failure; it's about leading in your market, delivering superior products, and outpacing competitors.
+
+**Protect Your Startup's Future**: For startups, every decision can have significant implications. By integrating GovernanceAI into your development process, you protect your initiatives from the risks associated with bad APIs, ensuring your team can focus on innovation and growth rather than firefighting and damage control.
+
+Embracing GovernanceAI is not merely a technical decision—it's a strategic move to safeguard your startup from the risks of underperformance and to secure a competitive advantage in your market.
+
 
 ## GovernanceAI Free and Open API
 
@@ -32,7 +47,7 @@ GovernanceAI's API is freely available for developers to integrate into their wo
 **cURL Example:**
 
 ```bash
-curl -X POST http://api.governanceai.example.com/scan \
+curl -X POST https://free-api-tools.perfai.us/api/v1/governance-ai/scan \
 -H "Content-Type: application/json" \
 -d '{
   "openApiSpecUrl": "https://yourapi.com/spec.yaml"
@@ -59,11 +74,11 @@ Please star the repo if you find it useful!
 
 ## Fair-use Policy
 
-You are free to use, modify, and distribute the code for “our project name”  for personal or commercial purposes. Please refrain from using the code for malicious purposes or violating any laws. While attribution is encouraged, it's not mandatory. Contributions are welcome under the same license. The code comes without warranties, and we are not liable for any issues. Report violations via the repository or the email listed in the contact information. We reserve the right to modify this policy. By using the code, you agree to comply with this Fair Use Policy.
+You are free to use, modify, and distribute the code for “Governance-AI”  for personal or commercial purposes. Please refrain from using the code for malicious purposes or violating any laws. While attribution is encouraged, it's not mandatory. Contributions are welcome under the same license. The code comes without warranties, and we are not liable for any issues. Report violations via the repository or the email listed in the contact information. We reserve the right to modify this policy. By using the code, you agree to comply with this Fair Use Policy.
 
 ## License
 
-The code in this repository is licensed under the Apache License, Version 2.0. You are free to use, modify, and distribute the code for “our project name” for personal or commercial purposes. The license allows for open and free use, with the condition that any contributions you make are also licensed under the same terms. Please refer to the “Apache License 2.0” file for the full text of the Apache License, Version 2.0.
+The code in this repository is licensed under the Apache License, Version 2.0. You are free to use, modify, and distribute the code for “Governance-AI” for personal or commercial purposes. The license allows for open and free use, with the condition that any contributions you make are also licensed under the same terms. Please refer to the “LICENSE” file for the full text of the Apache License, Version 2.0.
 
 ## Roadmap
 
