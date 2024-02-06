@@ -10,9 +10,9 @@
   </thead>
   <tbody>
     <tr>
-      <td><a href="https://github.com/madushadhanushka/differ"><b>Differ</b></a></td>
-      <td><img alt="Stars" src="https://img.shields.io/github/stars/madushadhanushka/differ?style=flat-square&labelColor=343b41"/></td>
-      <td><img alt="Forks" src="https://img.shields.io/github/forks/madushadhanushka/differ?style=flat-square&labelColor=343b41"/></td>
+      <td><a href="https://github.com/PerfAI-Inc/Free-API-Tools"><b>Differ</b></a></td>
+      <td><img alt="Stars" src="https://img.shields.io/github/stars/PerfAI-Inc/Free-API-Tools?style=flat-square&labelColor=343b41"/></td>
+      <td><img alt="Forks" src="https://img.shields.io/github/forks/PerfAI-Inc/Free-API-Tools?style=flat-square&labelColor=343b41"/></td>
     </tr>
     <tr>
       <td><a href="https://github.com/madushadhanushka/differ"><b>Simple SQLite</b></a></td>
