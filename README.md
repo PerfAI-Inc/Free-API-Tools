@@ -41,7 +41,7 @@ GovernanceAI's API is freely available for developers to integrate into their wo
 curl -X POST https://free-api-tools.perfai.us/api/v1/governance-ai/scan \
 -H "Content-Type: application/json" \
 -d '{
-  "openapi_spec": "https://yourapi.com/spec.yaml"
+  "openapi_spec": "[https://yourapi.com/spec.yaml](https://petstore.swagger.io/v2/swagger.yaml)"
 }'
 ```
 
