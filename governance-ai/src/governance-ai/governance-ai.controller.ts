@@ -65,7 +65,7 @@ export class GovernanceAiController {
             const analysisData = analysisResponse.data.das;
 
             // Map through each item and omit the 'remediation' and '_id' fields
-            const modifiedData = analysisData.map(({ remediation, _id, ...keepAttrs }) => keepAttrs);
+            const modifiedData = analysisData.map(({ _id, ...keepAttrs }) => keepAttrs);
 
             // Then, format this modified data to JSON string and send it in the response
             const formattedResponse = JSON.stringify(modifiedData, null, 2);
