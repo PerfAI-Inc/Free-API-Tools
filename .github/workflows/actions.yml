@@ -58,29 +58,29 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date '+%F-%H%M')"
       
-### Build and Push the Docker image to Google Artifact Registry (GAR) ###
-      - name: Build and Push to Google Artifact Registry
-        env:
-            TAG_NAME: ${{ steps.date.outputs.date }}
-        run: |-
-          docker build -t ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} . 
-          docker tag ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}                                                                                    
-          docker push ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}
+# ### Build and Push the Docker image to Google Artifact Registry (GAR) ###
+#       - name: Build and Push to Google Artifact Registry
+#         env:
+#             TAG_NAME: ${{ steps.date.outputs.date }}
+#         run: |-
+#           docker build -t ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} . 
+#           docker tag ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}                                                                                    
+#           docker push ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}
           
-### Get the Deploying Container to Gooogle Cloud RUN ###
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy ${{ env.GCR_SERVICE }} \
-             --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} \
-             --region ${{ env.GCR_REGION }} \
-             --platform managed \
-             --allow-unauthenticated \
-             --port=3000 \
-             --timeout=3600 \
-             --update-labels commit-sha=${{ github.sha }}
+# ### Get the Deploying Container to Gooogle Cloud RUN ###
+#       - name: Deploy to Cloud Run
+#         run: |
+#           gcloud run deploy ${{ env.GCR_SERVICE }} \
+#              --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} \
+#              --region ${{ env.GCR_REGION }} \
+#              --platform managed \
+#              --allow-unauthenticated \
+#              --port=3000 \
+#              --timeout=3600 \
+#              --update-labels commit-sha=${{ github.sha }}
              
-      - name: 'Show output'
-        run: echo ${{ steps.deploy.outputs.url }}   
+#       - name: 'Show output'
+#         run: echo ${{ steps.deploy.outputs.url }}   
 
 ############### PRODUCTION ENV ################
   Deploy-Production:
@@ -127,21 +127,28 @@ jobs:
           docker build -t ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} .
           docker tag ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}                                                                                               
           docker push ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}
-          
-### Get the Deploying Container to Gooogle Cloud RUN ###
-    - name: Deploy to Cloud Run
-      run: |
-           gcloud run deploy ${{ env.GCR_SERVICE }} \
-             --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} \
-             --region us-west1 \
-             --platform managed \
-             --allow-unauthenticated \
-             --port=3000 \
-             --timeout=3600 \
-             --update-labels commit-sha=${{ github.sha }}
 
-    - name: 'Show output'
-      run: echo ${{ steps.deploy.outputs.url }} 
+### Deploy to Google Kubernetes Engine (GKE) ###
+    - name: Update Kubernetes deployment
+      run: |
+         gcloud components install gke-gcloud-auth-plugin
+         gcloud container clusters get-credentials perfai-prod-standard --region us-central1 --project perfai-production
+         kubectl set image deployment governance-ai governance-ai=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} -n perfai
+         
+### Get the Deploying Container to Gooogle Cloud RUN ###
+    # - name: Deploy to Cloud Run
+    #   run: |
+    #        gcloud run deploy ${{ env.GCR_SERVICE }} \
+    #          --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} \
+    #          --region us-west1 \
+    #          --platform managed \
+    #          --allow-unauthenticated \
+    #          --port=3000 \
+    #          --timeout=3600 \
+    #          --update-labels commit-sha=${{ github.sha }}
+
+    # - name: 'Show output'
+    #   run: echo ${{ steps.deploy.outputs.url }} 
 
       
 ### Email Alert Notifcation ###
