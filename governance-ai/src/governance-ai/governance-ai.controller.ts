@@ -11,6 +11,7 @@ export class GovernanceAiController {
     async registerAndPoll(@Body() body: any, @Res() res): Promise<void> {
         try {
             // Step 1: Register the API URL
+            console.log("Starting Register!");
             const registrationResponse = await axios.post('https://webapp.api.perfaibackend.com/api/v1/api-catalog/apps/create-run', {
                 openapi_spec: body.openapi_spec,
             }, {
@@ -19,6 +20,7 @@ export class GovernanceAiController {
                     'Authorization': `Bearer ${this.token}`,
                 },
             });
+            console.log("Register Successful");
 
             // Extract the _id from the third element of the response array
             const appId = registrationResponse.data[2]._id;
@@ -36,6 +38,7 @@ export class GovernanceAiController {
             // Step 2: Poll the endpoint until the analysis is COMPLETE
             let analysisStatus = '';
             let analysisResponse;
+            console.log("Running through GovernanceAI");
             do {
                 const result = await Promise.race([
                     axios.get(`https://webapp.api.perfaibackend.com/api/v1/design-analysis-service/apps?id=${appId}`, {
@@ -61,6 +64,8 @@ export class GovernanceAiController {
                 }
 
             } while (analysisStatus !== 'COMPLETED');
+
+            console.log("Completed GovernanceAI");
 
             const analysisData = analysisResponse.data.das;
 
