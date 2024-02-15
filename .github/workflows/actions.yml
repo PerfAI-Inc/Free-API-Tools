@@ -58,16 +58,23 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date '+%F-%H%M')"
       
-# ### Build and Push the Docker image to Google Artifact Registry (GAR) ###
-#       - name: Build and Push to Google Artifact Registry
-#         env:
-#             TAG_NAME: ${{ steps.date.outputs.date }}
-#         run: |-
-#           docker build -t ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} . 
-#           docker tag ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}                                                                                    
-#           docker push ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}
-          
-# ### Get the Deploying Container to Gooogle Cloud RUN ###
+### Build and Push the Docker image to Google Artifact Registry (GAR) ###
+      - name: Build and Push to Google Artifact Registry
+        env:
+            TAG_NAME: ${{ steps.date.outputs.date }}
+        run: |-
+          docker build -t ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} . 
+          docker tag ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}                                                                                    
+          docker push ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}
+
+ ### Google Kubernetes Engine (GKE) ###
+      - name: Deploy to Developer Env (GKE)
+        run: |
+         gcloud components install gke-gcloud-auth-plugin
+         gcloud container clusters get-credentials perfai-dev-autopilot --region us-central1 --project perfai-dev
+         kubectl set image deployment governance-ai governance-ai=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} -n perfai
+         
+### Get the Deploying Container to Gooogle Cloud RUN ###
 #       - name: Deploy to Cloud Run
 #         run: |
 #           gcloud run deploy ${{ env.GCR_SERVICE }} \
@@ -128,8 +135,8 @@ jobs:
           docker tag ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}                                                                                               
           docker push ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }}
 
-### Deploy to Google Kubernetes Engine (GKE) ###
-    - name: Update Kubernetes deployment
+### Google Kubernetes Engine (GKE) ###
+    - name: Deploy to PROD Env (GKE)
       run: |
          gcloud components install gke-gcloud-auth-plugin
          gcloud container clusters get-credentials perfai-prod-standard --region us-central1 --project perfai-production
