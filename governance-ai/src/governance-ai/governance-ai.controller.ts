@@ -1,6 +1,5 @@
 import { Controller, Post, Body, Res } from '@nestjs/common';
 import axios from 'axios';
-import * as yaml from 'js-yaml';
 
 
 @Controller('api/v1/governance-ai')
