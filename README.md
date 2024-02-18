@@ -38,7 +38,7 @@ GovernanceAI's API is freely available for developers to integrate into their wo
 **cURL Example:**
 
 ```bash
-curl -X POST https://free-api-tools.perfai.us/api/v1/governance-ai/scan \
+curl -X POST https://free-api-tools.perfai.ai/api/v1/governance-ai/scan \
 -H "Content-Type: application/json" \
 -d '{
   "openapi_spec": "https://petstore.swagger.io/v2/swagger.yaml"
