@@ -54,9 +54,10 @@ curl -X POST https://free-api-tools.perfai.ai/api/v1/governance-ai/scan \
     {
       "method": "GET",
       "path": "/example-endpoint",
+      "id": "1234aabbcc",
       "category": "Security",
       "priority": "High",
-      "summary": "Summary of the issue"
+      "remediation": "Summary of the issue"
     }
   ]
 }
