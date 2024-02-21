@@ -11,7 +11,7 @@ export class ReleaseAiController {
         try {
             // Step 1: Register the API URL
             console.log("Starting Register!");
-            const registrationResponse = await axios.post('https://webapp.api.perfaibackend.com/api/v1/api-catalog/apps/create-run', {
+            const registrationResponse = await axios.post('https://api.perfai.ai/api/v1/api-catalog/apps/create-run', {
                 openapi_spec: body.openapi_spec,
             }, {
                 headers: {
@@ -42,7 +42,7 @@ export class ReleaseAiController {
             // do {
                 const result = await Promise.race([
                     // console.log(appId),
-                    axios.get(`https://webapp.api.perfaibackend.com/api/v1/version-management-service/apps/api-version?app_id=${appId}`, {
+                    axios.get(`https://api.perfai.ai/api/v1/version-management-service/apps/api-version?app_id=65c3d79e139133aa0f41082a`, {
                         headers: {
                             'Authorization': `Bearer ${this.token}`
                         }
