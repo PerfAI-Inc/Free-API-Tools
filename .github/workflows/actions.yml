@@ -1,4 +1,4 @@
-name: Deploying Governance-AI in Cloud RUN
+name: Create, Build and Deploy into GKE Cluster
 
 on: 
   push:
@@ -170,5 +170,5 @@ jobs:
           subject: Build fail
           body: Have a look at fail job https://github.com/PerfAI-Inc/WebApp-API/actions
          # to: rashid@perfai.ai
-          to: intesar@perfai.ai,ahmed@perfai.ai,rashid@perfai.ai,ahsan.nadeem@tekrowe.com,arsalankhan013@gmail.com,mdafroze05@gmail.com,usman.sajid@tekrowe.com,yobeid2002@gmail.com,hajera.laique@gmail.com,maad.ali@tekrowe.com
+          to: intesar@perfai.ai,ahmed@perfai.ai,rashid@perfai.ai,maad.ali@tekrowe.com,ahsan.nadeem@tekrowe.com,usman.sajid@tekrowe.com,arsalan@perfai.ai,hajera@perfai.ai,yahya@perfai.ai,faraz@perfai.ai,mdafroze05@gmail.com 
           from: PerfAI    
