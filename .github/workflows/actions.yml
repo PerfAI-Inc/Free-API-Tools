@@ -7,16 +7,13 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   PROD_PROJECT: ${{ secrets.PROD_PROJECT }}
-  REPOSITORY: governance-ai                         # Add your repository name here.
-  GAR_LOCATION: us-south1                    # Add your repository region name here.
-  IMAGE: governance-ai                               # Add your image name here.
-  IMAGE_TAG: $(date "+%F-%H%M")              # Add your image date-tag name here.
-  
-  GCR_SERVICE: governance-ai                         # Add your cloud run service name here.
-  GCR_REGION: us-west1                      # Add your cloud run region name here.
-
-  GKE_CLUSTER: us-cluster1                      # Add your cluster name here.
-  GKE_ZONE: us-central1-c                       # Add your cluster zone here.
+  REPOSITORY: ${{ secrets.REPOSITORY }}              # Add your repository name here.
+  GAR_LOCATION: us-south1                            # Add your repository region name here.
+  IMAGE: ${{ secrets.IMAGE }}                        # Add your image name here.
+  IMAGE_TAG: $(date "+%F-%H%M")                      # Add your image date-tag name here.
+  GKE_CLUSTER_DEV: ${{ secrets.GKE_CLUSTER_DEV }}    # Add your cluster name here.
+  GKE_CLUSTER_PROD: ${{ secrets.GKE_CLUSTER_PROD }}  # Add your cluster name here.
+  GKE_REGION: us-cluster1                            # Add your cluster region here.
   
 jobs:
   Deploy-Developer:
@@ -71,23 +68,9 @@ jobs:
       - name: Deploy to Developer Env (GKE)
         run: |
          gcloud components install gke-gcloud-auth-plugin
-         gcloud container clusters get-credentials perfai-dev-autopilot --region us-central1 --project perfai-dev
+         gcloud container clusters get-credentials ${{ env.GKE_CLUSTER_DEV }} --region ${{ env.GKE_REGION }} --project ${{ env.PROJECT_ID }}
          kubectl set image deployment governance-ai governance-ai=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} -n perfai
-         
-### Get the Deploying Container to Gooogle Cloud RUN ###
-#       - name: Deploy to Cloud Run
-#         run: |
-#           gcloud run deploy ${{ env.GCR_SERVICE }} \
-#              --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} \
-#              --region ${{ env.GCR_REGION }} \
-#              --platform managed \
-#              --allow-unauthenticated \
-#              --port=3000 \
-#              --timeout=3600 \
-#              --update-labels commit-sha=${{ github.sha }}
-             
-#       - name: 'Show output'
-#         run: echo ${{ steps.deploy.outputs.url }}   
+          
 
 ############### PRODUCTION ENV ################
   Deploy-Production:
@@ -139,25 +122,9 @@ jobs:
     - name: Deploy to PROD Env (GKE)
       run: |
          gcloud components install gke-gcloud-auth-plugin
-         gcloud container clusters get-credentials perfai-prod-standard --region us-central1 --project perfai-production
+         gcloud container clusters get-credentials ${{ env.GKE_CLUSTER_PROD }} --region ${{ env.GKE_REGION }} --project ${{ env.PROD_PROJECT }}
          kubectl set image deployment governance-ai governance-ai=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} -n perfai
-         
-### Get the Deploying Container to Gooogle Cloud RUN ###
-    # - name: Deploy to Cloud Run
-    #   run: |
-    #        gcloud run deploy ${{ env.GCR_SERVICE }} \
-    #          --image ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROD_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ steps.date.outputs.date }} \
-    #          --region us-west1 \
-    #          --platform managed \
-    #          --allow-unauthenticated \
-    #          --port=3000 \
-    #          --timeout=3600 \
-    #          --update-labels commit-sha=${{ github.sha }}
-
-    # - name: 'Show output'
-    #   run: echo ${{ steps.deploy.outputs.url }} 
-
-      
+           
 ### Email Alert Notifcation ###
     - name: Send mail
       if: failure()
